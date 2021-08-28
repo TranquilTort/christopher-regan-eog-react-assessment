@@ -18,7 +18,7 @@ import NowWhat from './components/NowWhat';
 const errorLink = onError(({graphQLErrors, networkError})=>{
   if (graphQLErrors) {
     graphQLErrors.map(({ message, locations, path }) =>
-      console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`),
+      alert(`Graphql error ${message}`)
     );
   }
 })
@@ -49,11 +49,13 @@ const theme = createTheme({
 const App = () => (
   <MuiThemeProvider theme={theme}>
     <CssBaseline />
-    <Wrapper>
-      <Header />
-      <NowWhat />
-      <ToastContainer />
-    </Wrapper>
+    <ApolloProvider client={client}>
+      <Wrapper>
+        <Header />
+        <NowWhat />
+        <ToastContainer />
+      </Wrapper>
+    </ApolloProvider>
   </MuiThemeProvider>
 );
 
